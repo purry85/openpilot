@@ -16,12 +16,12 @@ class LatControlPID():
   def reset(self):
     self.pid.reset()
 
-  def update(self, active, CS, CP, VM, params, lat_plan):
+  def update(self, active, CS, CP, VM, params, desired_curvature, desired_curvature_rate):
     pid_log = log.ControlsState.LateralPIDState.new_message()
     pid_log.steeringAngleDeg = float(CS.steeringAngleDeg)
     pid_log.steeringRateDeg = float(CS.steeringRateDeg)
 
-    angle_steers_des_no_offset = math.degrees(VM.get_steer_from_curvature(-lat_plan.curvature, CS.vEgo))
+    angle_steers_des_no_offset = math.degrees(VM.get_steer_from_curvature(-desired_curvature, CS.vEgo))
     angle_steers_des = angle_steers_des_no_offset + params.angleOffsetDeg
 
     if CS.vEgo < 0.3 or not active or not CS.lkasEnable:
@@ -36,8 +36,6 @@ class LatControlPID():
       # TODO: feedforward something based on lat_plan.rateSteers
       steer_feedforward = angle_steers_des_no_offset  # offset does not contribute to resistive torque
       steer_feedforward *= CS.vEgo**2  # proportional to realigning tire momentum (~ lateral accel)
-      #_c1, _c2, _c3 = [0.35189607550172824, 7.506201251644202, 69.226826411091]
-      #steer_feedforward *= _c1 * CS.vEgo ** 2 + _c2 * CS.vEgo + _c3
 
       deadzone = 0.0
 
@@ -51,4 +49,4 @@ class LatControlPID():
       pid_log.output = output_steer
       pid_log.saturated = bool(self.pid.saturated)
 
-    return output_steer, 0, pid_log
+    return output_steer, angle_steers_des, pid_log
