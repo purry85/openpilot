@@ -1,6 +1,6 @@
 /*
  *    This file was auto-generated using the ACADO Toolkit.
- *    
+ *
  *    While ACADO Toolkit is free software released under the terms of
  *    the GNU Lesser General Public License (LGPL), the generated code
  *    as such remains the property of the user who used ACADO Toolkit
@@ -9,11 +9,11 @@
  *    generated code that are a direct copy of source code from the
  *    ACADO Toolkit or the software tools it is based on, remain, as derived
  *    work, automatically covered by the LGPL license.
- *    
+ *
  *    ACADO Toolkit is distributed in the hope that it will be useful,
  *    but WITHOUT ANY WARRANTY; without even the implied warranty of
  *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *    
+ *
  */
 
 
@@ -434,7 +434,7 @@ int lRun3;
 int lRun4;
 int lRun5;
 /** Row vector of size: 32 */
-static const int xBoundIndices[ 32 ] = 
+static const int xBoundIndices[ 32 ] =
 { 6, 7, 10, 11, 14, 15, 18, 19, 22, 23, 26, 27, 30, 31, 34, 35, 38, 39, 42, 43, 46, 47, 50, 51, 54, 55, 58, 59, 62, 63, 66, 67 };
 acado_moveGuE( acadoWorkspace.evGu, acadoWorkspace.E );
 acado_moveGxT( &(acadoWorkspace.evGx[ 16 ]), acadoWorkspace.T );
@@ -2862,101 +2862,101 @@ acadoWorkspace.ub[1] = acadoWorkspace.Dx0[1];
 acadoWorkspace.ub[2] = acadoWorkspace.Dx0[2];
 acadoWorkspace.ub[3] = acadoWorkspace.Dx0[3];
 tmp = acadoVariables.x[6] + acadoWorkspace.d[2];
-acadoWorkspace.lbA[0] = (real_t)-1.5707963268000000e+00 - tmp;
-acadoWorkspace.ubA[0] = (real_t)1.5707963268000000e+00 - tmp;
+acadoWorkspace.lbA[0] = (real_t)-1.5707963267948966e+00 - tmp;
+acadoWorkspace.ubA[0] = (real_t)1.5707963267948966e+00 - tmp;
 tmp = acadoVariables.x[7] + acadoWorkspace.d[3];
-acadoWorkspace.lbA[1] = (real_t)-8.7266462600000005e-01 - tmp;
-acadoWorkspace.ubA[1] = (real_t)8.7266462600000005e-01 - tmp;
+acadoWorkspace.lbA[1] = (real_t)-8.7266462599716477e-01 - tmp;
+acadoWorkspace.ubA[1] = (real_t)8.7266462599716477e-01 - tmp;
 tmp = acadoVariables.x[10] + acadoWorkspace.d[6];
-acadoWorkspace.lbA[2] = (real_t)-1.5707963268000000e+00 - tmp;
-acadoWorkspace.ubA[2] = (real_t)1.5707963268000000e+00 - tmp;
+acadoWorkspace.lbA[2] = (real_t)-1.5707963267948966e+00 - tmp;
+acadoWorkspace.ubA[2] = (real_t)1.5707963267948966e+00 - tmp;
 tmp = acadoVariables.x[11] + acadoWorkspace.d[7];
-acadoWorkspace.lbA[3] = (real_t)-8.7266462600000005e-01 - tmp;
-acadoWorkspace.ubA[3] = (real_t)8.7266462600000005e-01 - tmp;
+acadoWorkspace.lbA[3] = (real_t)-8.7266462599716477e-01 - tmp;
+acadoWorkspace.ubA[3] = (real_t)8.7266462599716477e-01 - tmp;
 tmp = acadoVariables.x[14] + acadoWorkspace.d[10];
-acadoWorkspace.lbA[4] = (real_t)-1.5707963268000000e+00 - tmp;
-acadoWorkspace.ubA[4] = (real_t)1.5707963268000000e+00 - tmp;
+acadoWorkspace.lbA[4] = (real_t)-1.5707963267948966e+00 - tmp;
+acadoWorkspace.ubA[4] = (real_t)1.5707963267948966e+00 - tmp;
 tmp = acadoVariables.x[15] + acadoWorkspace.d[11];
-acadoWorkspace.lbA[5] = (real_t)-8.7266462600000005e-01 - tmp;
-acadoWorkspace.ubA[5] = (real_t)8.7266462600000005e-01 - tmp;
+acadoWorkspace.lbA[5] = (real_t)-8.7266462599716477e-01 - tmp;
+acadoWorkspace.ubA[5] = (real_t)8.7266462599716477e-01 - tmp;
 tmp = acadoVariables.x[18] + acadoWorkspace.d[14];
-acadoWorkspace.lbA[6] = (real_t)-1.5707963268000000e+00 - tmp;
-acadoWorkspace.ubA[6] = (real_t)1.5707963268000000e+00 - tmp;
+acadoWorkspace.lbA[6] = (real_t)-1.5707963267948966e+00 - tmp;
+acadoWorkspace.ubA[6] = (real_t)1.5707963267948966e+00 - tmp;
 tmp = acadoVariables.x[19] + acadoWorkspace.d[15];
-acadoWorkspace.lbA[7] = (real_t)-8.7266462600000005e-01 - tmp;
-acadoWorkspace.ubA[7] = (real_t)8.7266462600000005e-01 - tmp;
+acadoWorkspace.lbA[7] = (real_t)-8.7266462599716477e-01 - tmp;
+acadoWorkspace.ubA[7] = (real_t)8.7266462599716477e-01 - tmp;
 tmp = acadoVariables.x[22] + acadoWorkspace.d[18];
-acadoWorkspace.lbA[8] = (real_t)-1.5707963268000000e+00 - tmp;
-acadoWorkspace.ubA[8] = (real_t)1.5707963268000000e+00 - tmp;
+acadoWorkspace.lbA[8] = (real_t)-1.5707963267948966e+00 - tmp;
+acadoWorkspace.ubA[8] = (real_t)1.5707963267948966e+00 - tmp;
 tmp = acadoVariables.x[23] + acadoWorkspace.d[19];
-acadoWorkspace.lbA[9] = (real_t)-8.7266462600000005e-01 - tmp;
-acadoWorkspace.ubA[9] = (real_t)8.7266462600000005e-01 - tmp;
+acadoWorkspace.lbA[9] = (real_t)-8.7266462599716477e-01 - tmp;
+acadoWorkspace.ubA[9] = (real_t)8.7266462599716477e-01 - tmp;
 tmp = acadoVariables.x[26] + acadoWorkspace.d[22];
-acadoWorkspace.lbA[10] = (real_t)-1.5707963268000000e+00 - tmp;
-acadoWorkspace.ubA[10] = (real_t)1.5707963268000000e+00 - tmp;
+acadoWorkspace.lbA[10] = (real_t)-1.5707963267948966e+00 - tmp;
+acadoWorkspace.ubA[10] = (real_t)1.5707963267948966e+00 - tmp;
 tmp = acadoVariables.x[27] + acadoWorkspace.d[23];
-acadoWorkspace.lbA[11] = (real_t)-8.7266462600000005e-01 - tmp;
-acadoWorkspace.ubA[11] = (real_t)8.7266462600000005e-01 - tmp;
+acadoWorkspace.lbA[11] = (real_t)-8.7266462599716477e-01 - tmp;
+acadoWorkspace.ubA[11] = (real_t)8.7266462599716477e-01 - tmp;
 tmp = acadoVariables.x[30] + acadoWorkspace.d[26];
-acadoWorkspace.lbA[12] = (real_t)-1.5707963268000000e+00 - tmp;
-acadoWorkspace.ubA[12] = (real_t)1.5707963268000000e+00 - tmp;
+acadoWorkspace.lbA[12] = (real_t)-1.5707963267948966e+00 - tmp;
+acadoWorkspace.ubA[12] = (real_t)1.5707963267948966e+00 - tmp;
 tmp = acadoVariables.x[31] + acadoWorkspace.d[27];
-acadoWorkspace.lbA[13] = (real_t)-8.7266462600000005e-01 - tmp;
-acadoWorkspace.ubA[13] = (real_t)8.7266462600000005e-01 - tmp;
+acadoWorkspace.lbA[13] = (real_t)-8.7266462599716477e-01 - tmp;
+acadoWorkspace.ubA[13] = (real_t)8.7266462599716477e-01 - tmp;
 tmp = acadoVariables.x[34] + acadoWorkspace.d[30];
-acadoWorkspace.lbA[14] = (real_t)-1.5707963268000000e+00 - tmp;
-acadoWorkspace.ubA[14] = (real_t)1.5707963268000000e+00 - tmp;
+acadoWorkspace.lbA[14] = (real_t)-1.5707963267948966e+00 - tmp;
+acadoWorkspace.ubA[14] = (real_t)1.5707963267948966e+00 - tmp;
 tmp = acadoVariables.x[35] + acadoWorkspace.d[31];
-acadoWorkspace.lbA[15] = (real_t)-8.7266462600000005e-01 - tmp;
-acadoWorkspace.ubA[15] = (real_t)8.7266462600000005e-01 - tmp;
+acadoWorkspace.lbA[15] = (real_t)-8.7266462599716477e-01 - tmp;
+acadoWorkspace.ubA[15] = (real_t)8.7266462599716477e-01 - tmp;
 tmp = acadoVariables.x[38] + acadoWorkspace.d[34];
-acadoWorkspace.lbA[16] = (real_t)-1.5707963268000000e+00 - tmp;
-acadoWorkspace.ubA[16] = (real_t)1.5707963268000000e+00 - tmp;
+acadoWorkspace.lbA[16] = (real_t)-1.5707963267948966e+00 - tmp;
+acadoWorkspace.ubA[16] = (real_t)1.5707963267948966e+00 - tmp;
 tmp = acadoVariables.x[39] + acadoWorkspace.d[35];
-acadoWorkspace.lbA[17] = (real_t)-8.7266462600000005e-01 - tmp;
-acadoWorkspace.ubA[17] = (real_t)8.7266462600000005e-01 - tmp;
+acadoWorkspace.lbA[17] = (real_t)-8.7266462599716477e-01 - tmp;
+acadoWorkspace.ubA[17] = (real_t)8.7266462599716477e-01 - tmp;
 tmp = acadoVariables.x[42] + acadoWorkspace.d[38];
-acadoWorkspace.lbA[18] = (real_t)-1.5707963268000000e+00 - tmp;
-acadoWorkspace.ubA[18] = (real_t)1.5707963268000000e+00 - tmp;
+acadoWorkspace.lbA[18] = (real_t)-1.5707963267948966e+00 - tmp;
+acadoWorkspace.ubA[18] = (real_t)1.5707963267948966e+00 - tmp;
 tmp = acadoVariables.x[43] + acadoWorkspace.d[39];
-acadoWorkspace.lbA[19] = (real_t)-8.7266462600000005e-01 - tmp;
-acadoWorkspace.ubA[19] = (real_t)8.7266462600000005e-01 - tmp;
+acadoWorkspace.lbA[19] = (real_t)-8.7266462599716477e-01 - tmp;
+acadoWorkspace.ubA[19] = (real_t)8.7266462599716477e-01 - tmp;
 tmp = acadoVariables.x[46] + acadoWorkspace.d[42];
-acadoWorkspace.lbA[20] = (real_t)-1.5707963268000000e+00 - tmp;
-acadoWorkspace.ubA[20] = (real_t)1.5707963268000000e+00 - tmp;
+acadoWorkspace.lbA[20] = (real_t)-1.5707963267948966e+00 - tmp;
+acadoWorkspace.ubA[20] = (real_t)1.5707963267948966e+00 - tmp;
 tmp = acadoVariables.x[47] + acadoWorkspace.d[43];
-acadoWorkspace.lbA[21] = (real_t)-8.7266462600000005e-01 - tmp;
-acadoWorkspace.ubA[21] = (real_t)8.7266462600000005e-01 - tmp;
+acadoWorkspace.lbA[21] = (real_t)-8.7266462599716477e-01 - tmp;
+acadoWorkspace.ubA[21] = (real_t)8.7266462599716477e-01 - tmp;
 tmp = acadoVariables.x[50] + acadoWorkspace.d[46];
-acadoWorkspace.lbA[22] = (real_t)-1.5707963268000000e+00 - tmp;
-acadoWorkspace.ubA[22] = (real_t)1.5707963268000000e+00 - tmp;
+acadoWorkspace.lbA[22] = (real_t)-1.5707963267948966e+00 - tmp;
+acadoWorkspace.ubA[22] = (real_t)1.5707963267948966e+00 - tmp;
 tmp = acadoVariables.x[51] + acadoWorkspace.d[47];
-acadoWorkspace.lbA[23] = (real_t)-8.7266462600000005e-01 - tmp;
-acadoWorkspace.ubA[23] = (real_t)8.7266462600000005e-01 - tmp;
+acadoWorkspace.lbA[23] = (real_t)-8.7266462599716477e-01 - tmp;
+acadoWorkspace.ubA[23] = (real_t)8.7266462599716477e-01 - tmp;
 tmp = acadoVariables.x[54] + acadoWorkspace.d[50];
-acadoWorkspace.lbA[24] = (real_t)-1.5707963268000000e+00 - tmp;
-acadoWorkspace.ubA[24] = (real_t)1.5707963268000000e+00 - tmp;
+acadoWorkspace.lbA[24] = (real_t)-1.5707963267948966e+00 - tmp;
+acadoWorkspace.ubA[24] = (real_t)1.5707963267948966e+00 - tmp;
 tmp = acadoVariables.x[55] + acadoWorkspace.d[51];
-acadoWorkspace.lbA[25] = (real_t)-8.7266462600000005e-01 - tmp;
-acadoWorkspace.ubA[25] = (real_t)8.7266462600000005e-01 - tmp;
+acadoWorkspace.lbA[25] = (real_t)-8.7266462599716477e-01 - tmp;
+acadoWorkspace.ubA[25] = (real_t)8.7266462599716477e-01 - tmp;
 tmp = acadoVariables.x[58] + acadoWorkspace.d[54];
-acadoWorkspace.lbA[26] = (real_t)-1.5707963268000000e+00 - tmp;
-acadoWorkspace.ubA[26] = (real_t)1.5707963268000000e+00 - tmp;
+acadoWorkspace.lbA[26] = (real_t)-1.5707963267948966e+00 - tmp;
+acadoWorkspace.ubA[26] = (real_t)1.5707963267948966e+00 - tmp;
 tmp = acadoVariables.x[59] + acadoWorkspace.d[55];
-acadoWorkspace.lbA[27] = (real_t)-8.7266462600000005e-01 - tmp;
-acadoWorkspace.ubA[27] = (real_t)8.7266462600000005e-01 - tmp;
+acadoWorkspace.lbA[27] = (real_t)-8.7266462599716477e-01 - tmp;
+acadoWorkspace.ubA[27] = (real_t)8.7266462599716477e-01 - tmp;
 tmp = acadoVariables.x[62] + acadoWorkspace.d[58];
-acadoWorkspace.lbA[28] = (real_t)-1.5707963268000000e+00 - tmp;
-acadoWorkspace.ubA[28] = (real_t)1.5707963268000000e+00 - tmp;
+acadoWorkspace.lbA[28] = (real_t)-1.5707963267948966e+00 - tmp;
+acadoWorkspace.ubA[28] = (real_t)1.5707963267948966e+00 - tmp;
 tmp = acadoVariables.x[63] + acadoWorkspace.d[59];
-acadoWorkspace.lbA[29] = (real_t)-8.7266462600000005e-01 - tmp;
-acadoWorkspace.ubA[29] = (real_t)8.7266462600000005e-01 - tmp;
+acadoWorkspace.lbA[29] = (real_t)-8.7266462599716477e-01 - tmp;
+acadoWorkspace.ubA[29] = (real_t)8.7266462599716477e-01 - tmp;
 tmp = acadoVariables.x[66] + acadoWorkspace.d[62];
-acadoWorkspace.lbA[30] = (real_t)-1.5707963268000000e+00 - tmp;
-acadoWorkspace.ubA[30] = (real_t)1.5707963268000000e+00 - tmp;
+acadoWorkspace.lbA[30] = (real_t)-1.5707963267948966e+00 - tmp;
+acadoWorkspace.ubA[30] = (real_t)1.5707963267948966e+00 - tmp;
 tmp = acadoVariables.x[67] + acadoWorkspace.d[63];
-acadoWorkspace.lbA[31] = (real_t)-8.7266462600000005e-01 - tmp;
-acadoWorkspace.ubA[31] = (real_t)8.7266462600000005e-01 - tmp;
+acadoWorkspace.lbA[31] = (real_t)-8.7266462599716477e-01 - tmp;
+acadoWorkspace.ubA[31] = (real_t)8.7266462599716477e-01 - tmp;
 
 }
 
@@ -3262,7 +3262,7 @@ acadoVariables.x[65] = xEnd[1];
 acadoVariables.x[66] = xEnd[2];
 acadoVariables.x[67] = xEnd[3];
 }
-else if (strategy == 2) 
+else if (strategy == 2)
 {
 acadoWorkspace.state[0] = acadoVariables.x[64];
 acadoWorkspace.state[1] = acadoVariables.x[65];
@@ -3381,4 +3381,3 @@ objVal += + acadoWorkspace.DyN[0]*tmpDyN[0] + acadoWorkspace.DyN[1]*tmpDyN[1];
 objVal *= 0.5;
 return objVal;
 }
-
