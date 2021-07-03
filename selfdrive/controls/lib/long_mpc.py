@@ -6,11 +6,7 @@ from common.realtime import sec_since_boot
 from selfdrive.controls.lib.longitudinal_mpc_lib import libmpc_py
 from selfdrive.controls.lib.drive_helpers import LON_MPC_N
 from selfdrive.modeld.constants import T_IDXS
-from common.numpy_fast import interp
 
-
-VEL = [0.0, 2.778, 5.556, 8.333, 11.111, 13.889, 16.667, 19.444, 22.222, 25.0, 27.778]  # velocities
-DIST = [1.8, 1.8, 1.85, 1.85, 1.9, 1.95, 2.0, 2.0, 2.1, 2.2, 2.3]
 
 class LongitudinalMpc():
   def __init__(self):
@@ -45,8 +41,6 @@ class LongitudinalMpc():
     self.cur_state[0].v_ego = v_safe
     self.cur_state[0].a_ego = a_safe
 
-  def calc_TR(self, CS):
-    self.TR = interp(CS.v_ego, VEL, DIST)
 
   def update(self, carstate, model, v_cruise):
     v_cruise_clipped = np.clip(v_cruise, self.cur_state[0].v_ego - 10., self.cur_state[0].v_ego + 10.0)
@@ -57,7 +51,7 @@ class LongitudinalMpc():
     # Calculate mpc
     self.libmpc.run_mpc(self.cur_state, self.mpc_solution,
                         list(poss), list(speeds), list(accels),
-                        self.min_a, self.max_a, self.TR)
+                        self.min_a, self.max_a)
 
     # Reset if NaN or goes through lead car
     nans = any(math.isnan(x) for x in self.mpc_solution[0].v_ego)
