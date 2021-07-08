@@ -55,6 +55,7 @@ class LateralPlanner():
     self.lane_change_direction = LaneChangeDirection.none
     self.lane_change_timer = 0.0
     self.lane_change_ll_prob = 1.0
+    self.keep_pulse_timer = 0.0
     self.prev_one_blinker = False
     self.desire = log.LateralPlan.Desire.none
 
@@ -157,14 +158,25 @@ class LateralPlanner():
 
     self.desire = DESIRES[self.lane_change_direction][self.lane_change_state]
 
+    # Send keep pulse once per second during LaneChangeStart.preLaneChange
+    if self.lane_change_state in [LaneChangeState.off, LaneChangeState.laneChangeStarting]:
+      self.keep_pulse_timer = 0.0
+    elif self.lane_change_state == LaneChangeState.preLaneChange:
+      self.keep_pulse_timer += DT_MDL
+      if self.keep_pulse_timer > 1.0:
+        self.keep_pulse_timer = 0.0
+      elif self.desire in [log.LateralPlan.Desire.keepLeft, log.LateralPlan.Desire.keepRight]:
+        self.desire = log.LateralPlan.Desire.none
+
     # Turn off lanes during lane change
     if self.desire == log.LateralPlan.Desire.laneChangeRight or self.desire == log.LateralPlan.Desire.laneChangeLeft:
       self.LP.lll_prob *= self.lane_change_ll_prob
       self.LP.rll_prob *= self.lane_change_ll_prob
     if self.use_lanelines:
       d_path_xyz = self.LP.get_d_path(v_ego, self.t_idxs, self.path_xyz)
-      heading_cost = interp(v_ego, [0., 5.], [MPC_COST_LAT.HEADING*2., MPC_COST_LAT.HEADING])
-      self.libmpc.set_weights(MPC_COST_LAT.PATH, heading_cost, CP.steerRateCost)
+      #heading_cost = interp(v_ego, [0., 5.], [MPC_COST_LAT.HEADING*2., MPC_COST_LAT.HEADING])
+      #self.libmpc.set_weights(MPC_COST_LAT.PATH, heading_cost, CP.steerRateCost)
+	  self.libmpc.set_weights(MPC_COST_LAT.PATH, MPC_COST_LAT.HEADING, CP.steerRateCost)
     else:
       d_path_xyz = self.path_xyz
       path_cost = np.clip(abs(self.path_xyz[0,1]/self.path_xyz_stds[0,1]), 0.5, 5.0) * MPC_COST_LAT.PATH
@@ -177,6 +189,9 @@ class LateralPlanner():
 
     assert len(y_pts) == LAT_MPC_N + 1
     assert len(heading_pts) == LAT_MPC_N + 1
+    # for now CAR_ROTATION_RADIUS is disabled
+    # to use it, enable it in the MPC
+    assert abs(CAR_ROTATION_RADIUS) < 1e-3
     self.libmpc.run_mpc(self.cur_state, self.mpc_solution,
                         float(v_ego),
                         CAR_ROTATION_RADIUS,

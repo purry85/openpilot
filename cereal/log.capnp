@@ -519,10 +519,12 @@ struct ControlsState @0x97ff69c53601abf1 {
 
   longControlState @30 :LongControlState;
   vPid @2 :Float32;
+  vTargetLead @3 :Float32;
   vCruise @22 :Float32;
   upAccelCmd @4 :Float32;
   uiAccelCmd @5 :Float32;
   ufAccelCmd @33 :Float32;
+  aTarget @35 :Float32;
   curvature @37 :Float32;  # path curvature from vehicle model
   forceDecel @51 :Bool;
 
@@ -624,8 +626,6 @@ struct ControlsState @0x97ff69c53601abf1 {
   }
 
   # deprecated
-  vTargetLeadDEPRECATED @3 :Float32;
-  aTargetDEPRECATED @35 :Float32;
   vEgoDEPRECATED @0 :Float32;
   vEgoRawDEPRECATED @32 :Float32;
   aEgoDEPRECATED @1 :Float32;
@@ -789,9 +789,8 @@ struct LongitudinalPlan @0xe00b5b3eba12876c {
   hasLead @7 :Bool;
   fcw @8 :Bool;
   longitudinalPlanSource @15 :LongitudinalPlanSource;
-
   processingDelay @29 :Float32;
-
+  
   # desired speed/accel over next 2.5s
   accels @32 :List(Float32);
   speeds @33 :List(Float32);

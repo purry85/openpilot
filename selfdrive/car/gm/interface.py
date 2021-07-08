@@ -29,9 +29,8 @@ class CarInterface(CarInterfaceBase):
     # Presence of a camera on the object bus is ok.
     # Have to go to read_only if ASCM is online (ACC-enabled cars),
     # or camera is on powertrain bus (LKA cars without ACC).
-    ret.enableCamera = True
     ret.enableGasInterceptor = 0x201 in fingerprint[0]
-    ret.openpilotLongitudinalControl = ret.enableCamera and ret.enableGasInterceptor
+    ret.openpilotLongitudinalControl = ret.enableGasInterceptor
 
     params = Params()
     LQR_enabled = params.get_bool("LQR_Selected")
