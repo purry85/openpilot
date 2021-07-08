@@ -176,7 +176,7 @@ class LateralPlanner():
       d_path_xyz = self.LP.get_d_path(v_ego, self.t_idxs, self.path_xyz)
       #heading_cost = interp(v_ego, [0., 5.], [MPC_COST_LAT.HEADING*2., MPC_COST_LAT.HEADING])
       #self.libmpc.set_weights(MPC_COST_LAT.PATH, heading_cost, CP.steerRateCost)
-	  self.libmpc.set_weights(MPC_COST_LAT.PATH, MPC_COST_LAT.HEADING, CP.steerRateCost)
+      self.libmpc.set_weights(MPC_COST_LAT.PATH, MPC_COST_LAT.HEADING, CP.steerRateCost)
     else:
       d_path_xyz = self.path_xyz
       path_cost = np.clip(abs(self.path_xyz[0,1]/self.path_xyz_stds[0,1]), 0.5, 5.0) * MPC_COST_LAT.PATH
