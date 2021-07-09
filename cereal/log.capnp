@@ -1376,8 +1376,6 @@ struct Event {
     longitudinalPlan @24 :LongitudinalPlan;
     lateralPlan @64 :LateralPlan;
     ubloxGnss @34 :UbloxGnss;
-    liveMpc @36 :LiveMpcData;
-    liveLongitudinalMpc @37 :LiveLongitudinalMpcData;
     ubloxRaw @39 :Data;
     gpsLocationExternal @48 :GpsLocationData;
     driverState @59 :DriverState;
@@ -1412,6 +1410,8 @@ struct Event {
 
     # *********** legacy + deprecated ***********
     model @9 :Legacy.ModelData; # TODO: rename modelV2 and mark this as deprecated
+    liveMpcDEPRECATED @36 :LiveMpcData;
+    liveLongitudinalMpcDEPRECATED @37 :LiveLongitudinalMpcData;
     liveLocationKalmanDEPRECATED @51 :Legacy.LiveLocationData;
     orbslamCorrectionDEPRECATED @45 :Legacy.OrbslamCorrection;
     liveUIDEPRECATED @14 :Legacy.LiveUI;
