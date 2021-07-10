@@ -55,22 +55,10 @@ class CarController():
 
       if not enabled or not CS.adaptive_Cruise:
         final_pedal = 0
-        #regen_active = False
       elif CS.adaptive_Cruise:
-        #regen_active = True if actuators.brake > 0.01 else False
-        #regen = clip(actuators.brake / 2, 0., 0.1)
-        #Delta = actuators.gas - self.apply_pedal_last
-        #min_pedal_speed = interp(CS.out.vEgo, VEL, MIN_PEDAL)
-        #if Delta > 0:
-        #pedal = 0.6 * actuators.gas + self.apply_pedal_last * 0.4
         pedal = actuators.gas - actuators.brake
-        #else:
-          #pedal = self.apply_pedal_last + Delta / 5.
-
-        #gas_pedal = clip(pedal, min_pedal_speed, 1.)
         final_pedal = clip(pedal, 0., 1.)
 
-      #self.apply_pedal_last = final_pedal
       idx = (frame // 2) % 4
       can_sends.append(create_gas_command(self.packer_pt, final_pedal, idx))
 

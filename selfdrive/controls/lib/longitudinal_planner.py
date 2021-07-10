@@ -18,7 +18,7 @@ from selfdrive.swaglog import cloudlog
 
 LON_MPC_STEP = 0.2  # first step is 0.2s
 AWARENESS_DECEL = -0.2     # car smoothly decel at .2m/s^2 when user is distracted
-A_CRUISE_MIN = -1.2
+A_CRUISE_MIN = -2.5
 A_CRUISE_MAX = 1.2
 
 # Lookup table for turns

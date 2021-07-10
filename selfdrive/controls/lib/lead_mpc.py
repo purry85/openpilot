@@ -11,7 +11,7 @@ from selfdrive.swaglog import cloudlog
 MPC_T = list(np.arange(0,1.,.2)) + list(np.arange(1.,10.6,.6))
 
 VEL = [0.0, 2.778, 5.556, 8.333, 11.111, 13.889, 16.667, 19.444, 22.222, 25.0, 27.778]  # velocities
-DIST = [1.8, 1.8, 1.85, 1.85, 1.9, 1.95, 2.0, 2.0, 2.1, 2.2, 2.3]
+DIST = [2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5]
 
 
 class LeadMpc():
