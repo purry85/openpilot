@@ -58,6 +58,8 @@ class CarController():
       elif CS.adaptive_Cruise:
         pedal = actuators.gas - actuators.brake
         final_pedal = clip(pedal, 0., 1.)
+        if actuators.brake > 0.1:
+          can_sends.append(gmcan.create_regen_paddle_command(self.packer_pt, CanBus.POWERTRAIN))
 
       idx = (frame // 2) % 4
       can_sends.append(create_gas_command(self.packer_pt, final_pedal, idx))
