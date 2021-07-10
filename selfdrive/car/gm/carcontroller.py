@@ -9,8 +9,8 @@ from opendbc.can.packer import CANPacker
 
 VisualAlert = car.CarControl.HUDControl.VisualAlert
 
-VEL = [16.667, 22.2222]  # velocities
-MIN_PEDAL = [0., 0.05]
+#VEL = [16.667, 22.2222]  # velocities
+#MIN_PEDAL = [0., 0.05]
 
 class CarController():
   def __init__(self, dbc_name, CP, VM):
@@ -18,8 +18,8 @@ class CarController():
     self.apply_steer_last = 0
     self.lka_icon_status_last = (False, False)
     self.steer_rate_limited = False
-    self.accel_steady = 0.
-    self.apply_pedal_last = 0.
+    #self.accel_steady = 0.
+    #self.apply_pedal_last = 0.
 
     self.params = CarControllerParams()
 
@@ -58,18 +58,19 @@ class CarController():
         #regen_active = False
       elif CS.adaptive_Cruise:
         #regen_active = True if actuators.brake > 0.01 else False
-        regen = clip(actuators.brake / 2, 0., 0.1)
+        #regen = clip(actuators.brake / 2, 0., 0.1)
         #Delta = actuators.gas - self.apply_pedal_last
-        min_pedal_speed = interp(CS.out.vEgo, VEL, MIN_PEDAL)
+        #min_pedal_speed = interp(CS.out.vEgo, VEL, MIN_PEDAL)
         #if Delta > 0:
-        pedal = 0.6 * actuators.gas + self.apply_pedal_last * 0.4
+        #pedal = 0.6 * actuators.gas + self.apply_pedal_last * 0.4
+        pedal = actuators.gas - actuators.brake
         #else:
           #pedal = self.apply_pedal_last + Delta / 5.
 
-        gas_pedal = clip(pedal, min_pedal_speed, 1.)
-        final_pedal = clip(gas_pedal - regen, 0., 1.)
+        #gas_pedal = clip(pedal, min_pedal_speed, 1.)
+        final_pedal = clip(pedal, 0., 1.)
 
-      self.apply_pedal_last = final_pedal
+      #self.apply_pedal_last = final_pedal
       idx = (frame // 2) % 4
       can_sends.append(create_gas_command(self.packer_pt, final_pedal, idx))
 
