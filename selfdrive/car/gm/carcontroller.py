@@ -65,8 +65,9 @@ class CarController():
       if not enabled or not CS.adaptive_Cruise:
         final_pedal = 0
       elif CS.adaptive_Cruise:
-        pedal = clip(actuators.gas - actuators.brake, 0., 1.)
-        final_pedal, self.accel_steady = accel_hysteresis(pedal, self.accel_steady)
+        pedal = actuators.gas - actuators.brake
+        pedal, self.accel_steady = accel_hysteresis(pedal, self.accel_steady)
+        final_pedal = clip(pedal, 0., 1.)
         #delta = self.apply_pedal_last - pedal
         #if delta > 0.05:
           #final_pedal = self.apply_pedal_last - DT_CTRL * 5
