@@ -9,8 +9,17 @@ from opendbc.can.packer import CANPacker
 
 VisualAlert = car.CarControl.HUDControl.VisualAlert
 
-#VEL = [16.667, 22.2222]  # velocities
-#MIN_PEDAL = [0., 0.05]
+
+def accel_hysteresis(accel, accel_steady):
+
+  # for small accel oscillations less than 0.02, don't change the accel command
+  if accel > accel_steady + 0.02:
+    accel_steady = accel - 0.02
+  elif accel < accel_steady - 0.02:
+    accel_steady = accel + 0.02
+  accel = accel_steady
+
+  return accel, accel_steady
 
 class CarController():
   def __init__(self, dbc_name, CP, VM):
@@ -18,8 +27,8 @@ class CarController():
     self.apply_steer_last = 0
     self.lka_icon_status_last = (False, False)
     self.steer_rate_limited = False
-    #self.accel_steady = 0.
-    #self.apply_pedal_last = 0.
+    self.accel_steady = 0.
+    self.apply_pedal_last = 0.
 
     self.params = CarControllerParams()
 
@@ -56,13 +65,17 @@ class CarController():
       if not enabled or not CS.adaptive_Cruise:
         final_pedal = 0
       elif CS.adaptive_Cruise:
-        pedal = actuators.gas - actuators.brake
-        final_pedal = clip(pedal, 0., 1.)
+        pedal = clip(actuators.gas - actuators.brake, 0., 1.)
+        pedal, self.accel_steady = accel_hysteresis(pedal, self.accel_steady)
+        delta = self.apply_pedal_last - pedal
+        if delta < 0.05:
+          final_pedal = self.apply_pedal_last - DT_CTRL * 5
         if actuators.brake > 0.1:
           can_sends.append(gmcan.create_regen_paddle_command(self.packer_pt, CanBus.POWERTRAIN))
 
       idx = (frame // 2) % 4
       can_sends.append(create_gas_command(self.packer_pt, final_pedal, idx))
+      self.apply_pedal_last = final_pedal
 
     # Send dashboard UI commands (ACC status), 25hz
     #if (frame % 4) == 0:
