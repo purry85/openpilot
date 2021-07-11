@@ -89,7 +89,6 @@ typedef struct UIScene {
 
   // gps
   int satelliteCount;
-  float gpsAccuracy;
 
   // modelV2
   float lane_line_probs[4];
