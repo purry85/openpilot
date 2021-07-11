@@ -28,7 +28,7 @@ class CarController():
     self.lka_icon_status_last = (False, False)
     self.steer_rate_limited = False
     self.accel_steady = 0.
-    self.apply_pedal_last = 0.
+    #self.apply_pedal_last = 0.
 
     self.params = CarControllerParams()
 
@@ -66,16 +66,16 @@ class CarController():
         final_pedal = 0
       elif CS.adaptive_Cruise:
         pedal = clip(actuators.gas - actuators.brake, 0., 1.)
-        pedal, self.accel_steady = accel_hysteresis(pedal, self.accel_steady)
-        delta = self.apply_pedal_last - pedal
-        if delta > 0.05:
-          final_pedal = self.apply_pedal_last - DT_CTRL * 5
+        final_pedal, self.accel_steady = accel_hysteresis(pedal, self.accel_steady)
+        #delta = self.apply_pedal_last - pedal
+        #if delta > 0.05:
+          #final_pedal = self.apply_pedal_last - DT_CTRL * 5
         if actuators.brake > 0.1:
           can_sends.append(gmcan.create_regen_paddle_command(self.packer_pt, CanBus.POWERTRAIN))
 
       idx = (frame // 2) % 4
       can_sends.append(create_gas_command(self.packer_pt, final_pedal, idx))
-      self.apply_pedal_last = final_pedal
+      #self.apply_pedal_last = final_pedal
 
     # Send dashboard UI commands (ACC status), 25hz
     #if (frame % 4) == 0:
