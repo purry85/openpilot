@@ -68,7 +68,7 @@ class CarController():
         pedal = clip(actuators.gas - actuators.brake, 0., 1.)
         pedal, self.accel_steady = accel_hysteresis(pedal, self.accel_steady)
         delta = self.apply_pedal_last - pedal
-        if delta < 0.05:
+        if delta > 0.05:
           final_pedal = self.apply_pedal_last - DT_CTRL * 5
         if actuators.brake > 0.1:
           can_sends.append(gmcan.create_regen_paddle_command(self.packer_pt, CanBus.POWERTRAIN))
