@@ -154,12 +154,12 @@ class CarInterface(CarInterfaceBase):
     ret.longitudinalTuning.kpV = [0.5, 0.45]
     ret.longitudinalTuning.kiBP = [0.]
     ret.longitudinalTuning.kiV = [0.055]
-    ret.longitudinalTuning.kfBP = [0., 13.889, 27.778]
+    ret.longitudinalTuning.kfBP = [16.667, 22.222, 27.778]
     ret.longitudinalTuning.kfV = [1., 0.5, 0.2]
 
     if ret.enableGasInterceptor:
-      ret.gasMaxBP = [0.0, 5.0, 9.0, 35.0]
-      ret.gasMaxV =  [0.4, 0.5, 0.7, 0.7]
+      ret.gasMaxBP = [5.0, 10.0]
+      ret.gasMaxV =  [0.5, 0.7]
 
     ret.startAccel = 1.0
 
