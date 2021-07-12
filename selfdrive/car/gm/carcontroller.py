@@ -9,6 +9,8 @@ from opendbc.can.packer import CANPacker
 
 VisualAlert = car.CarControl.HUDControl.VisualAlert
 
+VEL = [15., 20., 25.]  # velocities
+MIN_PEDAL = [0.001, 0.05, 0.07]
 
 def accel_hysteresis(accel, accel_steady):
 
@@ -65,13 +67,12 @@ class CarController():
       if not enabled or not CS.adaptive_Cruise:
         final_pedal = 0
       elif CS.adaptive_Cruise:
-        pedal = actuators.gas - actuators.brake
+        min_pedal_speed = interp(CS.out.vEgo, VEL, MIN_PEDAL)
+        pedal = clip(actuators.gas, MIN_PEDAL, 1.)
+        regen = actuators.brake
         pedal, self.accel_steady = accel_hysteresis(pedal, self.accel_steady)
-        final_pedal = clip(pedal, 0., 1.)
-        #delta = self.apply_pedal_last - pedal
-        #if delta > 0.05:
-          #final_pedal = self.apply_pedal_last - DT_CTRL * 5
-        if actuators.brake > 0.1:
+        final_pedal = clip(pedal - regen, 0., 1.)
+        if regen > 0.1:
           can_sends.append(gmcan.create_regen_paddle_command(self.packer_pt, CanBus.POWERTRAIN))
 
       idx = (frame // 2) % 4
