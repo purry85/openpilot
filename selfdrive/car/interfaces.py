@@ -98,7 +98,7 @@ class CarInterfaceBase():
   def apply(self, c):
     raise NotImplementedError
 
-  def create_common_events(self, cs_out, extra_gears=None, gas_resume_speed=-1):
+  def create_common_events(self, cs_out, extra_gears=None, gas_resume_speed=-1, pcm_enable=True):
     events = Events()
 
     if cs_out.doorOpen:
@@ -139,10 +139,12 @@ class CarInterfaceBase():
     if cs_out.brakePressed and (not self.CS.out.brakePressed or not cs_out.standstill):
       events.add(EventName.pedalPressed)
 
-    if cs_out.cruiseState.enabled and not self.CS.out.cruiseState.enabled:
-      events.add(EventName.pcmEnable)
-    elif not cs_out.cruiseState.enabled:
-      events.add(EventName.pcmDisable)
+    # we engage when pcm is active (rising edge)
+    if pcm_enable:
+      if cs_out.cruiseState.enabled and not self.CS.out.cruiseState.enabled:
+        events.add(EventName.pcmEnable)
+      elif not cs_out.cruiseState.enabled:
+        events.add(EventName.pcmDisable)
 
     return events
 
