@@ -10,7 +10,7 @@ STOPPING_EGO_SPEED = 2.0
 STOPPING_TARGET_SPEED_OFFSET = 1.0
 STARTING_TARGET_SPEED = 1.0
 BRAKE_THRESHOLD_TO_PID = 0.2
-REGEN_THRESHOLD = 0.07
+REGEN_THRESHOLD = 0.02
 
 BRAKE_STOPPING_TARGET = 0.5  # apply at least this amount of brake to maintain the vehicle stationary
 
@@ -97,13 +97,13 @@ class LongControl():
 
     v_ego_pid = max(CS.vEgo, CP.minSpeedCan)  # Without this we get jumps, CAN bus reports 0 when speed < 0.3
 
-    if self.long_control_state == LongCtrlState.off or CS.gasPressed or CS.regenPressed or not CS.adaptiveCruise:
+    if self.long_control_state == LongCtrlState.off or CS.gasPressedor or not CS.adaptiveCruise:
       self.reset(v_ego_pid)
       output_gb = 0.
 
-    #elif CS.regenPressed:
-    #  self.reset(CS.vEgo)
-    #  output_gb = min(output_gb, REGEN_THRESHOLD)
+    elif CS.regenPressed:
+      self.reset(CS.vEgo)
+      output_gb = REGEN_THRESHOLD
 
     # tracking objects and driving
     elif self.long_control_state == LongCtrlState.pid:

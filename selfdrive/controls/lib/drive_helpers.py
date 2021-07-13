@@ -53,6 +53,11 @@ def update_v_cruise(v_cruise_kph, buttonEvents, enabled):
 
   return v_cruise_kph
 
+def update_v_cruise_regen(v_ego, regen, enabled):
+  if enabled and regen:
+    v_cruise_kph = v_ego * CV.MS_TO_KPH
+
+  return v_cruise_kph
 
 def initialize_v_cruise(v_ego, buttonEvents, v_cruise_last):
   for b in buttonEvents:
