@@ -10,7 +10,7 @@ from opendbc.can.packer import CANPacker
 VisualAlert = car.CarControl.HUDControl.VisualAlert
 
 VEL = [15., 20., 25.]  # velocities
-MIN_PEDAL = [0.001, 0.05, 0.07]
+MIN_PEDAL = [0.01, 0.05, 0.07]
 
 def accel_hysteresis(accel, accel_steady):
 
@@ -68,7 +68,7 @@ class CarController():
         final_pedal = 0
       elif CS.adaptive_Cruise:
         min_pedal_speed = interp(CS.out.vEgo, VEL, MIN_PEDAL)
-        pedal = clip(actuators.gas, MIN_PEDAL, 1.)
+        pedal = clip(actuators.gas, min_pedal_speed, 1.)
         regen = actuators.brake
         pedal, self.accel_steady = accel_hysteresis(pedal, self.accel_steady)
         final_pedal = clip(pedal - regen, 0., 1.)
