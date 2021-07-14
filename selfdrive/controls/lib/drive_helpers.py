@@ -54,8 +54,10 @@ def update_v_cruise(v_cruise_kph, buttonEvents, enabled):
   return v_cruise_kph
 
 def update_v_cruise_regen(v_ego, v_cruise_kph, regen, enabled):
-  if enabled and regen and (v_ego * CV.MS_TO_KPH) > 40:
+  if enabled and regen:
     v_cruise_kph = v_ego * CV.MS_TO_KPH
+
+  v_cruise_kph = clip(v_cruise_kph, V_CRUISE_ENABLE_MIN, V_CRUISE_MAX)
 
   return v_cruise_kph
 
