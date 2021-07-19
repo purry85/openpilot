@@ -18,8 +18,8 @@
 #include "selfdrive/ui/dashcam.h"
 #endif
 
-#define BACKLIGHT_DT 0.25
-#define BACKLIGHT_TS 2.00
+#define BACKLIGHT_DT 0.05
+#define BACKLIGHT_TS 10.00
 #define BACKLIGHT_OFFROAD 75
 
 
