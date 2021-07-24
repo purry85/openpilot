@@ -4,6 +4,7 @@ This branch is only for GM Chevolet Bolt EV based on latest released version fro
 
 # Features
 
+  - Add target speed setting by long press (thanks to neokii님)
   - New panda code supports comma/custom made harness for black panda
   - Update panda and DBC for Comma Pedal
   - Toggle Switch for enabling prebuilt (thanks to 양민님)
@@ -17,13 +18,13 @@ This branch is only for GM Chevolet Bolt EV based on latest released version fro
        - Disengage : Driver braking or main switch off
     2) Only Longitudinal control by OP (comma pedal shall be installed)
        - Engage : accel(resume) button but main switch must be kept off
-       - Speed control : accel or decel button (+/- 5km/h)
+       - Speed control : accel or decel button (short : +/- 1 km/h, long : +/- 10 km/h)
        - Disengage : Driver braking or cancel button
        - If main switch is on, only lateral control will be enabled
-       - If you operate the regen paddle, the target speed will be decreased
+       - If you operate the regen paddle, the target speed will be decreased depending on vehicle speed
     3) Both Lateral and Longitudinal control by OP (comma pedal shall be installed)
        - Engage : set(decel) button but main switch must be kept off
-       - Speed control : accel or decel button (+/- 5km/h)
+       - Speed control : accel or decel button (short : +/- 1 km/h, long : +/- 10 km/h)
        - Disengage : Driver braking or cancel button
        - If main switch is on, only lateral control will be enabled
-       - If you operate the regen paddle, the target speed will be decreased
+       - If you operate the regen paddle, the target speed will be decreased depending on vehicle speed
