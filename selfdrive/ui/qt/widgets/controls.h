@@ -126,11 +126,8 @@ public:
     }
   };
 
-private:
-  std::string key;
-};
-
 protected:
+  std::string key;
   Params params;
 };
 
