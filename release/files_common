@@ -502,6 +502,7 @@ cereal/log.capnp
 cereal/services.py
 cereal/SConscript
 cereal/include/**
+cereal/logger/logger.h
 cereal/messaging/.gitignore
 cereal/messaging/__init__.py
 cereal/messaging/bridge.cc
@@ -525,7 +526,6 @@ cereal/visionipc/*.pxd
 
 panda/.gitignore
 panda/__init__.py
-panda/VERSION
 panda/board/**
 panda/certs/**
 panda/crypto/**
