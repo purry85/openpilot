@@ -127,7 +127,7 @@ typedef struct UIScene {
 
   //Add-on
   bool brakeLights;
-  int lead_status;
+  bool lead_status;
   float lead_d_rel, lead_v_rel;
 } UIScene;
 
