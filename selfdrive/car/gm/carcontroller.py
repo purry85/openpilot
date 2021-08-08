@@ -30,6 +30,7 @@ class CarController():
     self.lka_icon_status_last = (False, False)
     self.steer_rate_limited = False
     self.accel_steady = 0.
+    self.LKASCounter_prev = 0
     #self.apply_pedal_last = 0.
 
     self.params = CarControllerParams()
@@ -57,9 +58,13 @@ class CarController():
         apply_steer = 0
 
       self.apply_steer_last = apply_steer
-      idx = (frame // P.STEER_STEP) % 4
 
-      can_sends.append(gmcan.create_steering_control(self.packer_pt, CanBus.POWERTRAIN, apply_steer, idx, lkas_enabled))
+    if (frame % 2) == 0:
+      if CS.LKASCounter == ((self.LKASCounter_prev + 1) % 4):
+        idx = (CS.LKASCounter + 1) % 4
+        can_sends.append(gmcan.create_steering_control(self.packer_pt, CanBus.POWERTRAIN, self.apply_steer_last, idx, lkas_enabled))
+
+      self.LKASCounter_prev = CS.LKASCounter
 
     # Pedal/Regen
     if CS.CP.enableGasInterceptor and (frame % 2) == 0:
