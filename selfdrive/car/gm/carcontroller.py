@@ -59,9 +59,10 @@ class CarController():
 
       self.apply_steer_last = apply_steer
 
-    if CS.LKASCounter != self.LKASCounter_prev:
-      idx = (CS.LKASCounter + 1) % 4
-      can_sends.append(gmcan.create_steering_control(self.packer_pt, CanBus.POWERTRAIN, self.apply_steer_last, idx, lkas_enabled))
+    if (frame % 2) == 0:
+      if CS.LKASCounter == ((self.LKASCounter_prev + 1) % 4):
+        idx = (CS.LKASCounter + 1) % 4
+        can_sends.append(gmcan.create_steering_control(self.packer_pt, CanBus.POWERTRAIN, self.apply_steer_last, idx, lkas_enabled))
 
       self.LKASCounter_prev = CS.LKASCounter
 
