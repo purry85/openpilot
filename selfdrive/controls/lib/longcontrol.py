@@ -107,7 +107,7 @@ class LongControl():
 
     elif CS.gasPressed:
       self.reset(v_ego_pid)
-      output_gb = REGEN_THRESHOLD
+      output_gb = REGEN_THRESHOLD + 0.02
 
     # tracking objects and driving
     elif self.long_control_state == LongCtrlState.pid:
