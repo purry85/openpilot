@@ -74,7 +74,7 @@ class LongControl():
   def update(self, active, CS, CP, long_plan):
     """Update longitudinal control. This updates the state machine and runs a PID loop"""
     # Interp control trajectory
-    # TODO estimate car specific lag, use .5s for now
+    # TODO estimate car specific lag, use .15s for now
     if len(long_plan.speeds) == CONTROL_N:
       v_target = interp(DEFAULT_LONG_LAG, T_IDXS[:CONTROL_N], long_plan.speeds)
       v_target_future = long_plan.speeds[-1]
@@ -123,7 +123,7 @@ class LongControl():
       output_gb = self.pid.update(self.v_pid, v_ego_pid, speed=v_ego_pid, deadzone=deadzone, feedforward=a_target, freeze_integrator=prevent_overshoot)
 
       if prevent_overshoot:
-        output_gb = min(output_gb, 0.)
+        output_gb = min(output_gb, 0.0)
 
     # Intention is to stop, switch to a different brake control until we stop
     elif self.long_control_state == LongCtrlState.stopping:
