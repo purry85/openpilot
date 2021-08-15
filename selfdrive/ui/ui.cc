@@ -145,7 +145,7 @@ static void update_state(UIState *s) {
     auto model = sm["modelV2"].getModelV2();
     update_model(s, model);
     update_leads(s, model);
-	auto lead_one = sm["modelV2"].getModelV2().getLeadsV3()[0];
+	  auto lead_one = sm["modelV2"].getModelV2().getLeadsV3()[0];
     s->scene.lead_v_rel = lead_one.getV()[0];
     s->scene.lead_d_rel = lead_one.getX()[0];
 	if (lead_one.getProb() > 0.5) {
