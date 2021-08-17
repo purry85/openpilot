@@ -64,7 +64,7 @@ typedef struct Alert {
   }
 } Alert;
 
-const Alert CONTROLS_WAITING_ALERT = {"openpilot Unavailable", "Waiting for controls to start", 
+const Alert CONTROLS_WAITING_ALERT = {"openpilot Unavailable", "Waiting for controls to start",
                                       "controlsWaiting", cereal::ControlsState::AlertSize::MID,
                                       AudibleAlert::NONE};
 
@@ -127,8 +127,6 @@ typedef struct UIScene {
 
   //Add-on
   bool brakeLights;
-  bool lead_status;
-  float lead_d_rel, lead_v_rel;
 } UIScene;
 
 typedef struct UIState {
