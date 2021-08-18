@@ -406,8 +406,8 @@ static void ui_draw_vision(UIState *s) {
   ui_draw_vision_header(s);
   if ((*s->sm)["controlsState"].getControlsState().getAlertSize() == cereal::ControlsState::AlertSize::NONE) {
     ui_draw_vision_face(s);
-	ui_draw_vision_brake(s);
-	bb_ui_draw_UI(s);
+	  ui_draw_vision_brake(s);
+	  bb_ui_draw_UI(s);
   }
 }
 
