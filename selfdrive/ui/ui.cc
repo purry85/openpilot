@@ -145,14 +145,12 @@ static void update_state(UIState *s) {
     auto model = sm["modelV2"].getModelV2();
     update_model(s, model);
     update_leads(s, model);
-	  //auto lead_one = sm["modelV2"].getModelV2().getLeadsV3()[0];
-    //s->scene.lead_v_rel = lead_one.getV()[0];
-    //s->scene.lead_d_rel = lead_one.getX()[0];
-	//if (lead_one.getProb() > 0.5) {
-  //    s->scene.lead_status = true;
-	//} else {
-	//  s->scene.lead_status = false;
-	//}
+  }
+  if (sm.updated("radarState") && s->vg) {
+    auto radar_state = sm["radarState"].getRadarState();
+    s->scene.lead_v_rel = radar_state.getLeadOne().getVRel();
+    s->scene.lead_d_rel = radar_state.getLeadOne().getDRel();
+    s->scene.lead_status = radar_state.getLeadOne().getStatus();
   }
   if (sm.updated("liveCalibration")) {
     scene.world_objects_visible = true;

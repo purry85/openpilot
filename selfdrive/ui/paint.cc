@@ -298,19 +298,17 @@ static void bb_ui_draw_measures_left(UIState *s, int bb_x, int bb_y, int bb_w ) 
     char uom_str[6];
     NVGcolor val_color = nvgRGBA(255, 255, 255, 200);
 
-    auto radar_state = (*s->sm)["radarState"].getRadarState();
-    auto lead_one = radar_state.getLeadOne();
-    if (lead_one.getStatus()) {
+    if (s->scene.lead_status) {
       //show RED if less than 10 meters
       //show orange if less than 30 meters
-      if((int)(lead_one.getDRel()) < 30) {
+      if((int)(s->scene.lead_d_rel) < 30) {
         val_color = nvgRGBA(255, 188, 3, 200);
       }
-      if((int)(lead_one.getDRel()) < 10) {
+      if((int)(s->scene.lead_d_rel) < 10) {
         val_color = nvgRGBA(255, 0, 0, 200);
       }
       // lead car relative distance is always in meters
-      snprintf(val_str, sizeof(val_str), "%d", (int)lead_one.getDRel());
+      snprintf(val_str, sizeof(val_str), "%d", (int)s->scene.lead_d_rel);
     } else {
        snprintf(val_str, sizeof(val_str), "-");
     }
@@ -328,22 +326,20 @@ static void bb_ui_draw_measures_left(UIState *s, int bb_x, int bb_y, int bb_w ) 
     char uom_str[6];
     NVGcolor val_color = nvgRGBA(255, 255, 255, 200);
 
-    auto radar_state = (*s->sm)["radarState"].getRadarState();
-    auto lead_one = radar_state.getLeadOne();
-    if (lead_one.getStatus()) {
+    if (s->scene.lead_status) {
       //show Orange if negative speed (approaching)
       //show Orange if negative speed faster than 5mph (approaching fast)
-      if((int)(lead_one.getVRel()) < -5) {
+      if((int)(s->scene.lead_v_rel) < 0) {
         val_color = nvgRGBA(255, 188, 3, 200);
       }
-      if((int)(lead_one.getVRel()) < -10) {
+      if((int)(s->scene.lead_v_rel) < -5) {
         val_color = nvgRGBA(255, 0, 0, 200);
       }
       // lead car relative speed is always in meters
       if (s->scene.is_metric) {
-         snprintf(val_str, sizeof(val_str), "%d", (int)(lead_one.getVRel() * 3.6 + 0.5));
+         snprintf(val_str, sizeof(val_str), "%d", (int)(s->scene.lead_v_rel * 3.6 + 0.5));
       } else {
-         snprintf(val_str, sizeof(val_str), "%d", (int)(lead_one.getVRel() * 2.2374144 + 0.5));
+         snprintf(val_str, sizeof(val_str), "%d", (int)(s->scene.lead_v_rel * 2.2374144 + 0.5));
       }
     } else {
        snprintf(val_str, sizeof(val_str), "-");
@@ -373,7 +369,7 @@ static void bb_ui_draw_measures_left(UIState *s, int bb_x, int bb_y, int bb_w ) 
 
     snprintf(val_str, sizeof(val_str), "%d%%", batteryPercent);
     snprintf(uom_str, sizeof(uom_str), "");
-    bb_h +=bb_ui_draw_measure(s,  val_str, uom_str, "BAT LVL",
+    bb_h +=bb_ui_draw_measure(s,  val_str, uom_str, "BATTERY",
         bb_rx, bb_ry, bb_uom_dx,
         val_color, lab_color, uom_color,
         value_fontSize, label_fontSize, uom_fontSize );
@@ -408,8 +404,8 @@ static void ui_draw_vision(UIState *s) {
   ui_draw_vision_header(s);
   if ((*s->sm)["controlsState"].getControlsState().getAlertSize() == cereal::ControlsState::AlertSize::NONE) {
     ui_draw_vision_face(s);
-	ui_draw_vision_brake(s);
-	bb_ui_draw_UI(s);
+	  ui_draw_vision_brake(s);
+	  bb_ui_draw_UI(s);
   }
 }
 
