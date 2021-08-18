@@ -292,14 +292,15 @@ static void bb_ui_draw_measures_left(UIState *s, int bb_x, int bb_y, int bb_w ) 
   int uom_fontSize = 15;
   int bb_uom_dx =  (int)(bb_w /2 - uom_fontSize*2.5) ;
 
-  //add visual radar relative distance
+  //add visual radar relative distance and relative speed
+  auto radar_state = (*s->sm)["radarState"].getRadarState();
+  auto lead_one = radar_state.getLeadOne();
+
   if (true) {
     char val_str[16];
     char uom_str[6];
     NVGcolor val_color = nvgRGBA(255, 255, 255, 200);
 
-    auto radar_state = (*s->sm)["radarState"].getRadarState();
-    auto lead_one = radar_state.getLeadOne();
     if (lead_one.getStatus()) {
       //show RED if less than 10 meters
       //show orange if less than 30 meters
@@ -322,21 +323,18 @@ static void bb_ui_draw_measures_left(UIState *s, int bb_x, int bb_y, int bb_w ) 
     bb_ry = bb_y + bb_h;
   }
 
-  //add visual radar relative speed
   if (true) {
     char val_str[16];
     char uom_str[6];
     NVGcolor val_color = nvgRGBA(255, 255, 255, 200);
 
-    auto radar_state = (*s->sm)["radarState"].getRadarState();
-    auto lead_one = radar_state.getLeadOne();
     if (lead_one.getStatus()) {
       //show Orange if negative speed (approaching)
       //show Orange if negative speed faster than 5mph (approaching fast)
-      if((int)(lead_one.getVRel()) < -5) {
+      if((int)(lead_one.getVRel()) < 0) {
         val_color = nvgRGBA(255, 188, 3, 200);
       }
-      if((int)(lead_one.getVRel()) < -10) {
+      if((int)(lead_one.getVRel()) < -5) {
         val_color = nvgRGBA(255, 0, 0, 200);
       }
       // lead car relative speed is always in meters
