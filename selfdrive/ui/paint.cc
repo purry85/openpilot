@@ -293,25 +293,24 @@ static void bb_ui_draw_measures_left(UIState *s, int bb_x, int bb_y, int bb_w ) 
   int bb_uom_dx =  (int)(bb_w /2 - uom_fontSize*2.5) ;
 
   //add visual radar relative distance and relative speed
-  auto radar_state = (*s->sm)["radarState"].getRadarState();
-  auto lead_one = radar_state.getLeadOne();
+  auto lead_one = (*s->sm)["modelV2"].getModelV2().getLeadsV3()[0];
 
   if (true) {
     char val_str[16];
     char uom_str[6];
     NVGcolor val_color = nvgRGBA(255, 255, 255, 200);
 
-    if (lead_one.getStatus()) {
+    if (lead_one.getProb() > .5) {
       //show RED if less than 10 meters
       //show orange if less than 30 meters
-      if((int)(lead_one.getDRel()) < 30) {
+      if((int)(lead_one.getX()[0]) < 30) {
         val_color = nvgRGBA(255, 188, 3, 200);
       }
-      if((int)(lead_one.getDRel()) < 10) {
+      if((int)(lead_one.getX()[0]) < 10) {
         val_color = nvgRGBA(255, 0, 0, 200);
       }
       // lead car relative distance is always in meters
-      snprintf(val_str, sizeof(val_str), "%d", (int)lead_one.getDRel());
+      snprintf(val_str, sizeof(val_str), "%d", (int)lead_one.getX()[0]);
     } else {
        snprintf(val_str, sizeof(val_str), "-");
     }
@@ -328,20 +327,20 @@ static void bb_ui_draw_measures_left(UIState *s, int bb_x, int bb_y, int bb_w ) 
     char uom_str[6];
     NVGcolor val_color = nvgRGBA(255, 255, 255, 200);
 
-    if (lead_one.getStatus()) {
+    if (lead_one.getProb() > .5) {
       //show Orange if negative speed (approaching)
       //show Orange if negative speed faster than 5mph (approaching fast)
-      if((int)(lead_one.getVRel()) < 0) {
+      if((int)(lead_one.getV()[0]) < 0) {
         val_color = nvgRGBA(255, 188, 3, 200);
       }
-      if((int)(lead_one.getVRel()) < -5) {
+      if((int)(lead_one.getV()[0]) < -5) {
         val_color = nvgRGBA(255, 0, 0, 200);
       }
       // lead car relative speed is always in meters
       if (s->scene.is_metric) {
-         snprintf(val_str, sizeof(val_str), "%d", (int)(lead_one.getVRel() * 3.6 + 0.5));
+         snprintf(val_str, sizeof(val_str), "%d", (int)(lead_one.getV()[0] * 3.6 + 0.5));
       } else {
-         snprintf(val_str, sizeof(val_str), "%d", (int)(lead_one.getVRel() * 2.2374144 + 0.5));
+         snprintf(val_str, sizeof(val_str), "%d", (int)(lead_one.getV()[0] * 2.2374144 + 0.5));
       }
     } else {
        snprintf(val_str, sizeof(val_str), "-");
