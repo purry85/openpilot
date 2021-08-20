@@ -294,7 +294,7 @@ static void bb_ui_draw_measures_left(UIState *s, int bb_x, int bb_y, int bb_w ) 
 
   //add visual radar relative distance and relative speed
   auto lead_one = (*s->sm)["modelV2"].getModelV2().getLeadsV3()[0];
-  const float my_speed = std::max(0.0, (*s->sm)["carState"].getCarState().getVEgo();
+  const float my_speed = std::max(0.0, (*s->sm)["carState"].getCarState().getVEgo());
 
   if (true) {
     char val_str[16];
@@ -328,22 +328,22 @@ static void bb_ui_draw_measures_left(UIState *s, int bb_x, int bb_y, int bb_w ) 
     char uom_str[6];
     NVGcolor val_color = nvgRGBA(255, 255, 255, 200);
 
-    int v_rel = (int)(lead_one.getV()[0] - my_speed);
+    float v_rel = lead_one.getV()[0] - my_speed;
 
     if (lead_one.getProb() > .5) {
       //show Orange if negative speed (approaching)
       //show Orange if negative speed faster than 5mph (approaching fast)
-      if (v_rel < 0) {
+      if ((int)(v_rel < 0)) {
         val_color = nvgRGBA(255, 188, 3, 200);
       }
-      if (v_rel < -5) {
+      if ((int)(v_rel < -5)) {
         val_color = nvgRGBA(255, 0, 0, 200);
       }
       // lead car relative speed is always in meters
       if (s->scene.is_metric) {
-         snprintf(val_str, sizeof(val_str), "%d", (v_rel * 3.6 + 0.5));
+         snprintf(val_str, sizeof(val_str), "%d", (int)(v_rel * 3.6 + 0.5));
       } else {
-         snprintf(val_str, sizeof(val_str), "%d", (v_rel * 2.2374144 + 0.5));
+         snprintf(val_str, sizeof(val_str), "%d", (int)(v_rel * 2.2374144 + 0.5));
       }
     } else {
        snprintf(val_str, sizeof(val_str), "-");
