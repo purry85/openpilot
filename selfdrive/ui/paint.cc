@@ -294,7 +294,7 @@ static void bb_ui_draw_measures_left(UIState *s, int bb_x, int bb_y, int bb_w ) 
 
   //add visual radar relative distance and relative speed
   auto lead_one = (*s->sm)["modelV2"].getModelV2().getLeadsV3()[0];
-  const float my_speed = std::max(0.0, (*s->sm)["carState"].getCarState().getVEgo());
+  float my_speed = (*s->sm)["carState"].getCarState().getVEgo();
 
   if (true) {
     char val_str[16];
