@@ -302,7 +302,7 @@ struct DeviceState @0xa4d8b5af2aa492eb {
 
   lastAthenaPingTime @32 :UInt64;
   wifiIpAddress @35 :Text;
-  
+
   # system utilization
   freeSpacePercent @7 :Float32;
   memoryUsagePercent @19 :Int8;
@@ -1366,6 +1366,17 @@ struct UploaderState {
   lastTime @4 :Float32;  # s
   lastSpeed @5 :Float32; # MB/s
   lastFilename @6 :Text;
+}
+
+struct RoadLimitSpeed {
+    active @0 :UInt16;
+    roadLimitSpeed @1 :UInt16;
+    isHighway @2 :Bool;
+    camType @3 :UInt16;
+    camLimitSpeedLeftDist @4 :UInt16;
+    camLimitSpeed @5 :UInt16;
+    sectionLimitSpeed @6 :UInt16;
+    sectionLeftDist @7 :UInt16;
 }
 
 struct Event {
