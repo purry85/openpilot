@@ -81,7 +81,7 @@ def update_v_cruise(v_cruise_kph, buttonEvents, enabled, metric):
 
 def update_v_cruise_regen(v_ego, v_cruise_kph, regen, enabled):
   if enabled and regen:
-    if (v_ego * CV.MS_TO_KPH - REGEN_THRESHOLD) < v_cruise_kph:
+    if (v_ego * CV.MS_TO_KPH + REGEN_THRESHOLD) < v_cruise_kph:
       v_cruise_kph -= REGEN_THRESHOLD - -v_cruise_kph % 5
 
   v_cruise_kph = clip(v_cruise_kph, V_CRUISE_MIN, V_CRUISE_MAX)
