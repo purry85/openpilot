@@ -300,9 +300,9 @@ struct CarControl {
   cruiseControl @4 :CruiseControl;
   hudControl @5 :HUDControl;
 
-  roadLimitSpeedActive @6 :Int32;
-  roadLimitSpeed @7 :UInt32;
-  roadLimitSpeedLeftDist @8 :UInt32;
+  roadLimitSpeedActive @8 :Int32;
+  roadLimitSpeed @9 :UInt32;
+  roadLimitSpeedLeftDist @10 :UInt32;
 
   struct Actuators {
     # range from 0.0 - 1.0
