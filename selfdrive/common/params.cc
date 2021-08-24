@@ -224,22 +224,17 @@ std::unordered_map<std::string, uint32_t> keys = {
     {"Offroad_NvmeMissing", CLEAR_ON_MANAGER_START},
     {"ForcePowerDown", CLEAR_ON_MANAGER_START},
     {"JoystickDebugMode", CLEAR_ON_MANAGER_START | CLEAR_ON_IGNITION_OFF},
-    {"PrebuiltEnabled", PERSISTENT}, //prebuilt params on setting EON ui
-    {"INDI_Selected", PERSISTENT}, //Lateral control selection - INDI
-    {"LQR_Selected", PERSISTENT},  //Lateral control selection - LQR
 };
 
 } // namespace
 
-Params::Params(bool persistent_param) : Params(persistent_param ? Path::persistent_params() : Path::params()) {}
+Params::Params() : params_path(Path::params()) {
+  static std::once_flag once_flag;
+  std::call_once(once_flag, ensure_params_path, params_path);
+}
 
-std::once_flag default_params_path_ensured;
 Params::Params(const std::string &path) : params_path(path) {
-  if (path == Path::params()) {
-    std::call_once(default_params_path_ensured, ensure_params_path, path);
-  } else {
-    ensure_params_path(path);
-  }
+  ensure_params_path(params_path);
 }
 
 bool Params::checkKey(const std::string &key) {
