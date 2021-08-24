@@ -70,7 +70,7 @@ class CarController():
         #min_pedal_speed = interp(CS.out.vEgo, VEL, MIN_PEDAL)
         #pedal = clip(actuators.gas, min_pedal_speed, 1.)
         #regen = actuators.brake
-        pedal = clip(actuators.gas, 0.15, 1.)
+        pedal = clip(actuators.gas, 0.12, 1.)
         regen = clip(actuators.brake, 0., 0.15)
         pedal, self.accel_steady = accel_hysteresis(pedal, self.accel_steady)
         final_pedal = clip(pedal - regen, 0., 1.)
