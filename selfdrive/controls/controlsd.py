@@ -142,7 +142,8 @@ class Controls:
     self.v_cruise_kph = 255
     self.v_cruise_kph_last = 0
     self.v_cruise_kph_long = 0
-    self.v_cruise_road_limit = 0
+    self.v_cruise_kph_prev = 0
+    self.v_cruise_road_limit_prev = 0
     self.roadLimitSpeedActive = False
     self.mismatch_counter = 0
     self.can_error_counter = 0
@@ -371,13 +372,15 @@ class Controls:
 
     # if stock cruise is completely disabled, then we can use our own set speed logic
     if CS.adaptiveCruise:
-      self.v_cruise_kph_long = update_v_cruise(self.v_cruise_kph, CS.buttonEvents, self.enabled, self.is_metric)
+      self.v_cruise_kph_long = update_v_cruise(self.v_cruise_kph_long_prev, CS.buttonEvents, self.enabled, self.is_metric)
       self.roadLimitSpeedActive = road_speed_limiter_get_active()
-      self.v_cruise_road_limit = road_speed_limiter_get_max_speed(CS, self.v_cruise_kph)
+      self.v_cruise_road_limit = road_speed_limiter_get_max_speed(CS, self.v_cruise_road_limit_prev)
       if self.roadLimitSpeedActive:
         self.v_cruise_kph = self.v_cruise_road_limit
+        self.v_cruise_road_limit_prev = self.v_cruise_road_limit
       else:
         self.v_cruise_kph = self.v_cruise_kph_long
+        self.v_cruise_kph_long_prev = self.v_cruise_kph_long
 
       if CS.regenPressed:
         self.v_cruise_kph = update_v_cruise_regen(CS.vEgo, self.v_cruise_kph, CS.regenPressed, self.enabled)

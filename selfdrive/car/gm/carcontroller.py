@@ -6,6 +6,7 @@ from selfdrive.car import apply_std_steer_torque_limits, create_gas_command
 from selfdrive.car.gm import gmcan
 from selfdrive.car.gm.values import DBC, CanBus, CarControllerParams
 from opendbc.can.packer import CANPacker
+from selfdrive.controls.lib.longcontrol import REGEN_THRESHOLD
 
 VisualAlert = car.CarControl.HUDControl.VisualAlert
 
@@ -71,9 +72,12 @@ class CarController():
         #pedal = clip(actuators.gas, min_pedal_speed, 1.)
         #regen = actuators.brake
         pedal = clip(actuators.gas, 0.12, 1.)
-        regen = clip(actuators.brake, 0., 0.15)
+        regen = clip(actuators.brake, 0., 0.1)
         pedal, self.accel_steady = accel_hysteresis(pedal, self.accel_steady)
-        final_pedal = clip(pedal - regen, 0., 1.)
+        if CS.regen_pressed:
+          final_pedal = REGEN_THRESHOLD
+        else:
+          final_pedal = clip(pedal - regen, 0., 1.)
         #if regen:
         #  can_sends.append(gmcan.create_regen_paddle_command(self.packer_pt, CanBus.POWERTRAIN))
 

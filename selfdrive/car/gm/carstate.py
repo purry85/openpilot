@@ -20,6 +20,7 @@ class CarState(CarStateBase):
     ret = car.CarState.new_message()
     ret.adaptiveCruise = self.adaptive_Cruise
     ret.lkasEnable = self.enable_lkas
+    ret.regenPressed = self.regen_pressed
     self.prev_cruise_buttons = self.cruise_buttons
     self.cruise_buttons = pt_cp.vl["ASCMSteeringButton"]["ACCButtons"]
     ret.wheelSpeeds.fl = pt_cp.vl["EBCMWheelSpdFront"]["FLWheelSpd"] * CV.KPH_TO_MS
@@ -73,14 +74,14 @@ class CarState(CarStateBase):
     ret.cruiseState.standstill = False
 
     ret.brakePressed = ret.brake > 1e-5
-    ret.regenPressed = False
+    self.regen_pressed = False
     if self.car_fingerprint == CAR.VOLT or self.car_fingerprint == CAR.BOLT:
-      ret.regenPressed = bool(pt_cp.vl["EBCMRegenPaddle"]["RegenPaddle"])
+      self.regen_pressed = bool(pt_cp.vl["EBCMRegenPaddle"]["RegenPaddle"])
     brake_light_enable = False
     if self.car_fingerprint == CAR.BOLT:
       if ret.aEgo < -1.3:
         brake_light_enable = True
-    ret.brakeLights = ret.brakePressed or ret.regenPressed or brake_light_enable
+    ret.brakeLights = ret.brakePressed or self.regen_pressed or brake_light_enable
 
     ret.cruiseState.enabled = self.main_on or ret.adaptiveCruise
 
