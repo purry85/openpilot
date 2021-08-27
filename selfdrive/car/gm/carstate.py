@@ -15,6 +15,7 @@ class CarState(CarStateBase):
     self.shifter_values = can_define.dv["ECMPRDNL"]["PRNDL"]
     self.adaptive_Cruise = False
     self.enable_lkas = True
+    self.regen_pressed = False
 
   def update(self, pt_cp):
     ret = car.CarState.new_message()
