@@ -150,13 +150,13 @@ class CarInterface(CarInterfaceBase):
     ret.tireStiffnessFront, ret.tireStiffnessRear = scale_tire_stiffness(ret.mass, ret.wheelbase, ret.centerToFront,
                                                                          tire_stiffness_factor=tire_stiffness_factor)
 
-    ret.longitudinalTuning.kpBP = [0., 30.]
-    ret.longitudinalTuning.kpV = [0.5, 0.55]
-    ret.longitudinalTuning.kiBP = [0., 20.]
-    ret.longitudinalTuning.kiV = [0.045, 0.055]
-    ret.longitudinalTuning.kfBP = [15., 20., 25.]
-    ret.longitudinalTuning.kfV = [1., 0.5, 0.2]
-
+ret.longitudinalTuning.kpBP = [0, 10.*CV.KPH_TO_MS, 20.*CV.KPH_TO_MS, 40.*CV.KPH_TO_MS, 70.*CV.KPH_TO_MS, 100.*CV.KPH_TO_MS, 130.*CV.KPH_TO_MS]
+    ret.longitudinalTuning.kpV = [1.2, 1.05, 0.92, 0.765, 0.61, 0.5, 0.4]
+    ret.longitudinalTuning.kiBP = [0, 130. * CV.KPH_TO_MS]
+    ret.longitudinalTuning.kiV = [0.03, 0.02]
+    ret.longitudinalTuning.kfBP = [10.*CV.KPH_TO_MS, 30.*CV.KPH_TO_MS, 50.*CV.KPH_TO_MS, 80.*CV.KPH_TO_MS, 100.*CV.KPH_TO_MS, 130.*CV.KPH_TO_MS]
+    ret.longitudinalTuning.kfV = [1.0, 0.92, 0.86, 0.79, 0.76, 0.72]
+    
     if ret.enableGasInterceptor:
       ret.gasMaxBP = [5.0, 10.0]
       ret.gasMaxV =  [0.5, 0.7]
